@@ -43,8 +43,7 @@ const (
 var defaultNotifications = []BridgeUpdateNotification{
 	{Environment: EnvDevelopment, Channel: ChannelStable},
 	{Environment: EnvDevelopment, Channel: ChannelNightly},
-	// TODO enable after variables have been set in the CI settings
-	//{Environment: EnvStaging, Channel: ChannelStable},
+	{Environment: EnvStaging, Channel: ChannelStable},
 	{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 }
 
