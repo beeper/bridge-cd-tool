@@ -65,6 +65,8 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvDevelopment, Channel: ChannelNightly},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
 		{Environment: EnvDevelopment, Channel: ChannelNightly, Bridge: BridgeDummyWebsocket},
+		{Environment: EnvStaging, Channel: ChannelStable},
+		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
 	},
 	BridgeDummyWebsocket: {},
 }
