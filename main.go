@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 )
 
 func env(name string) string {
@@ -19,6 +20,11 @@ func main() {
 		return
 	} else if env("CI_JOB_STATUS") != "success" {
 		log.Println("Not notifying Beeper about update: build failed")
+		return
+	}
+	commitMsg := env("CI_COMMIT_MESSAGE")
+	if strings.Contains(commitMsg, "[cd skip]") || strings.Contains(commitMsg, "[skip cd]") {
+		log.Println("Not notifying Beeper about update: commit message says CD should be skipped")
 		return
 	}
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
