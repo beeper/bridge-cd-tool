@@ -36,6 +36,7 @@ const (
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
 	BridgeLinkedIn       BridgeType = "linkedin"
+	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
 )
@@ -60,6 +61,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeDiscord:       defaultNotifications,
 	BridgeSlack:         defaultNotifications,
 	BridgeLinkedIn:      defaultNotifications,
+	BridgeHungryserv:    defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelNightly},
