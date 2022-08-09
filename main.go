@@ -18,7 +18,7 @@ func main() {
 	if branch := env("CI_COMMIT_BRANCH"); branch != "main" && branch != "master" {
 		log.Println("Not notifying Beeper about update: not on main branch")
 		return
-	} else if env("CI_JOB_STATUS") != "success" {
+	} else if env("CI_JOB_STAGE") != "deploy" && env("CI_JOB_STATUS") != "success" {
 		log.Println("Not notifying Beeper about update: build failed")
 		return
 	}
