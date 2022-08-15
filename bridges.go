@@ -82,6 +82,12 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeLegacyDiscord: "%s/discord:%s",
 }
 
+const DefaultTargetRepoTemplate = "%s/bridge/%s"
+
+var targetImageRepoOverrides = map[BridgeType]string{
+	BridgeHungryserv: "/hungryserv",
+}
+
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
 	notifications, ok := bridgeNotifications[bridgeType]
 	if !ok || len(notifications) == 0 {
@@ -96,4 +102,12 @@ func (bridgeType BridgeType) FormatImage(image, commit string) string {
 		template = DefaultImageTemplate
 	}
 	return fmt.Sprintf(template, image, commit)
+}
+
+func (bridgeType BridgeType) TargetRepo(registry string) string {
+	repo, ok := targetImageRepoOverrides[bridgeType]
+	if !ok {
+		return fmt.Sprintf(DefaultTargetRepoTemplate, registry, string(bridgeType))
+	}
+	return registry + repo
 }

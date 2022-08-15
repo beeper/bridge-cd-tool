@@ -14,7 +14,31 @@ func env(name string) string {
 	return val
 }
 
+var GitHub = os.Getenv("GITHUB_ACTIONS") == "true"
+var GitLab = os.Getenv("GITLAB_CI") == "true"
+
 func main() {
+	if GitHub {
+		githubMain()
+	} else if GitLab {
+		gitlabMain()
+	} else {
+		log.Println("Unknown CI platform")
+		return
+	}
+}
+
+func githubMain() {
+	if branch := env("GITHUB_REF_NAME"); branch != "main" && branch != "master" {
+		log.Println("Not notifying Beeper about update: not on main branch")
+		return
+	}
+	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
+	image := bridgeType.FormatImage(bridgeType.TargetRepo(env("CI_REGISTRY")), env("GITHUB_SHA"))
+	doNotify(bridgeType, image)
+}
+
+func gitlabMain() {
 	if branch := env("CI_COMMIT_BRANCH"); branch != "main" && branch != "master" {
 		log.Println("Not notifying Beeper about update: not on main branch")
 		return
@@ -28,7 +52,11 @@ func main() {
 		return
 	}
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
-	image := bridgeType.FormatImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"))
+	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"))
+	doNotify(bridgeType, image)
+}
+
+func doNotify(bridgeType BridgeType, image string) {
 	targets := bridgeType.NotificationTargets()
 	log.Printf("Notifying %d channels about %s %s", len(targets), bridgeType, image)
 	for _, notif := range targets {
