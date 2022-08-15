@@ -37,5 +37,6 @@ func (bridgeType BridgeType) RetagImage(originalRepo, commitHash string) string 
 	targetImage := bridgeType.FormatImage(bridgeType.TargetRepo(registry), commitHash)
 	runCommand("docker", "tag", sourceImage, targetImage)
 	runCommand("docker", "push", targetImage)
+	runCommand("docker", "rmi", targetImage)
 	return targetImage
 }
