@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -26,7 +27,7 @@ func dockerCredentials() (username, password, registry string) {
 	}
 }
 
-func (bridgeType BridgeType) RetagImage(originalRepo, commitHash string) string {
+func (bridgeType BridgeType) RetagImage(originalRepo, commitHash string, latest bool) string {
 	username, password, registry := dockerCredentials()
 	runCommand("docker", "login",
 		"--username", username,
@@ -34,9 +35,15 @@ func (bridgeType BridgeType) RetagImage(originalRepo, commitHash string) string 
 		registry,
 	)
 	sourceImage := bridgeType.FormatImage(originalRepo, commitHash)
-	targetImage := bridgeType.FormatImage(bridgeType.TargetRepo(registry), commitHash)
+	targetRepo := bridgeType.TargetRepo(registry)
+	targetImage := bridgeType.FormatImage(targetRepo, commitHash)
 	runCommand("docker", "tag", sourceImage, targetImage)
 	runCommand("docker", "push", targetImage)
+	if latest {
+		latestImage := fmt.Sprintf("%s:latest", targetRepo)
+		runCommand("docker", "tag", targetImage, latestImage)
+		runCommand("docker", "push", latestImage)
+	}
 	runCommand("docker", "rmi", targetImage)
 	return targetImage
 }

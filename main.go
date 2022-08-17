@@ -39,21 +39,21 @@ func githubMain() {
 }
 
 func gitlabMain() {
-	if branch := env("CI_COMMIT_BRANCH"); branch != "main" && branch != "master" {
-		log.Println("Not notifying Beeper about update: not on main branch")
-		return
-	} else if env("CI_JOB_STAGE") != "deploy" && env("CI_JOB_STATUS") != "success" {
+	if env("CI_JOB_STAGE") != "deploy" && env("CI_JOB_STATUS") != "success" {
 		log.Println("Not notifying Beeper about update: build failed")
 		return
 	}
-	commitMsg := env("CI_COMMIT_MESSAGE")
-	if strings.Contains(commitMsg, "[cd skip]") || strings.Contains(commitMsg, "[skip cd]") {
-		log.Println("Not notifying Beeper about update: commit message says CD should be skipped")
-		return
-	}
+	branch := env("CI_COMMIT_BRANCH")
+	isLatest := branch == "main" || branch == "master"
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
-	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"))
-	doNotify(bridgeType, image)
+	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"), isLatest)
+	if isLatest {
+		log.Println("Not notifying Beeper about update: not on main branch")
+	} else if commitMsg := env("CI_COMMIT_MESSAGE"); strings.Contains(commitMsg, "[cd skip]") || strings.Contains(commitMsg, "[skip cd]") {
+		log.Println("Not notifying Beeper about update: commit message says CD should be skipped")
+	} else {
+		doNotify(bridgeType, image)
+	}
 }
 
 func doNotify(bridgeType BridgeType, image string) {
