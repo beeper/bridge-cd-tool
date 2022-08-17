@@ -43,6 +43,7 @@ func (bridgeType BridgeType) RetagImage(originalRepo, commitHash string, latest 
 		latestImage := fmt.Sprintf("%s:latest", targetRepo)
 		runCommand("docker", "tag", targetImage, latestImage)
 		runCommand("docker", "push", latestImage)
+		runCommand("docker", "rmi", latestImage)
 	}
 	runCommand("docker", "rmi", targetImage)
 	return targetImage
