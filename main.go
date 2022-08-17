@@ -47,7 +47,7 @@ func gitlabMain() {
 	isLatest := branch == "main" || branch == "master"
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
 	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"), isLatest)
-	if isLatest {
+	if !isLatest {
 		log.Println("Not notifying Beeper about update: not on main branch")
 	} else if commitMsg := env("CI_COMMIT_MESSAGE"); strings.Contains(commitMsg, "[cd skip]") || strings.Contains(commitMsg, "[skip cd]") {
 		log.Println("Not notifying Beeper about update: commit message says CD should be skipped")
