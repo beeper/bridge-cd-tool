@@ -1,0 +1,79 @@
+name: Go
+
+on: [push, pull_request]
+
+env:
+  GO_VERSION: 1.19
+  CGO_ENABLED: 0
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go ${{ env.GO_VERSION }}
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ env.GO_VERSION }}
+          cache: true
+
+      - name: Install goimports
+        run: |
+          go install golang.org/x/tools/cmd/goimports@latest
+          export PATH="$HOME/go/bin:$PATH"
+
+      - name: Install pre-commit
+        run: pip install pre-commit
+
+      - name: Lint
+        run: pre-commit run -a
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go ${{ matrix.go-version }}
+        uses: actions/setup-go@v3
+        with:
+          go-version: ${{ matrix.go-version }}
+          cache: true
+
+      - name: Build
+        run: go build
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: bridge-cd-tool
+          path: bridge-cd-tool
+          if-no-files-found: error
+
+  deploy:
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/main' }}
+
+    needs: [build, lint]
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: bridge-cd-tool
+          path: bridge-cd-tool
+
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: bridge-cd-tool
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
