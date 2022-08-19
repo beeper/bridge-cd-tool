@@ -7,5 +7,13 @@ It's probably not very interesting for others.
 
 ```yaml
 - name: Run bridge CD tool
-  uses: beeper/bridge-cd-tool@turn-into-github-action
+  uses: beeper/bridge-cd-tool@main
+  env:
+    CI_REGISTRY: "${{ secrets.CI_REGISTRY }}"
+    BEEPER_DEV_ADMIN_API_URL: "${{ secrets.BEEPER_DEV_ADMIN_API_URL }}"
+    BEEPER_STAGING_ADMIN_API_URL: "${{ secrets.BEEPER_STAGING_ADMIN_API_URL }}"
+    BEEPER_PROD_ADMIN_API_URL: "${{ secrets.BEEPER_PROD_ADMIN_API_URL }}"
+    BEEPER_DEV_ADMIN_NIGHTLY_PASS: "${{ secrets.BEEPER_DEV_ADMIN_NIGHTLY_PASS }}"
+    BEEPER_STAGING_ADMIN_NIGHTLY_PASS: "${{ secrets.BEEPER_STAGING_ADMIN_NIGHTLY_PASS }}"
+    BEEPER_PROD_ADMIN_NIGHTLY_PASS: "${{ secrets.BEEPER_PROD_ADMIN_NIGHTLY_PASS }}"
 ```
