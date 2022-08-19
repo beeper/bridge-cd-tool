@@ -78,8 +78,9 @@ const DefaultImageTemplate = "%s:%s-amd64"
 var imageTemplateOverrides = map[BridgeType]string{
 	BridgeDummy:         "%s:%s",
 	BridgeHungryserv:    "%s:%s",
-	BridgeLegacySlack:   "%s/slack:%s",
 	BridgeLegacyDiscord: "%s/discord:%s",
+	BridgeLegacySlack:   "%s/slack:%s",
+	BridgeLinkedIn:      "%s:%s",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
