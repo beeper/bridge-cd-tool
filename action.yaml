@@ -1,0 +1,16 @@
+name: Beeper Bridge CD Tool
+description: |
+  This is a simple program used to notify the Beeper API server about bridge
+  updates. It's probably not very interesting for others.
+runs:
+  using: composite
+  steps:
+    - name: Download bridge-cd-tool
+      shell: bash
+      run: curl -L -o bridge-cd-tool http://beeper.github.io/bridge-cd-tool/bridge-cd-tool
+    - name: Make bridge-cd-tool executable
+      shell: bash
+      run: chmod +x bridge-cd-tool
+    - name: Run the bridge-cd-tool
+      run: ./bridge-cd-tool
+      shell: bash
