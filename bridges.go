@@ -43,7 +43,6 @@ const (
 
 var defaultNotifications = []BridgeUpdateNotification{
 	{Environment: EnvDevelopment, Channel: ChannelStable},
-	{Environment: EnvDevelopment, Channel: ChannelNightly},
 	{Environment: EnvStaging, Channel: ChannelStable},
 	{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 }
@@ -64,9 +63,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeHungryserv:    defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
-		{Environment: EnvDevelopment, Channel: ChannelNightly},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
-		{Environment: EnvDevelopment, Channel: ChannelNightly, Bridge: BridgeDummyWebsocket},
 		{Environment: EnvStaging, Channel: ChannelStable},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
 	},
