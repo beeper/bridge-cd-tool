@@ -28,6 +28,7 @@ const (
 	BridgeWhatsApp       BridgeType = "whatsapp"
 	BridgeFacebook       BridgeType = "facebook"
 	BridgeGoogleChat     BridgeType = "googlechat"
+	BridgeGroupMe        BridgeType = "groupme"
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
 	BridgeInstagram      BridgeType = "instagram"
@@ -52,6 +53,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeWhatsApp:      defaultNotifications,
 	BridgeFacebook:      defaultNotifications,
 	BridgeGoogleChat:    defaultNotifications,
+	BridgeGroupMe:       defaultNotifications,
 	BridgeTwitter:       defaultNotifications,
 	BridgeSignal:        defaultNotifications,
 	BridgeInstagram:     defaultNotifications,
@@ -74,6 +76,7 @@ const DefaultImageTemplate = "%s:%s-amd64"
 
 var imageTemplateOverrides = map[BridgeType]string{
 	BridgeDummy:         "%s:%s",
+	BridgeGroupMe:       "%s:%s",
 	BridgeHungryserv:    "%s:%s",
 	BridgeLegacyDiscord: "%s/discord:%s",
 	BridgeLegacySlack:   "%s/slack:%s",
