@@ -31,6 +31,7 @@ const (
 	BridgeGroupMe        BridgeType = "groupme"
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
+	BridgeSignald        BridgeType = "signald"
 	BridgeInstagram      BridgeType = "instagram"
 	BridgeLegacyDiscord  BridgeType = "discord"
 	BridgeLegacySlack    BridgeType = "slack"
@@ -56,6 +57,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGroupMe:       defaultNotifications,
 	BridgeTwitter:       defaultNotifications,
 	BridgeSignal:        defaultNotifications,
+	BridgeSignald:       defaultNotifications,
 	BridgeInstagram:     defaultNotifications,
 	BridgeLegacyDiscord: defaultNotifications,
 	BridgeLegacySlack:   defaultNotifications,
@@ -81,12 +83,14 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeLegacyDiscord: "%s/discord:%s",
 	BridgeLegacySlack:   "%s/slack:%s",
 	BridgeLinkedIn:      "%s:%s",
+	BridgeSignald:       "%s:%s",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv: "/hungryserv",
+	BridgeSignald:    "/signald",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
