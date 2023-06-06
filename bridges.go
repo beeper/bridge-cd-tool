@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 	"log"
+	"text/template"
 )
 
 type BeeperEnv string
@@ -33,11 +35,10 @@ const (
 	BridgeSignal         BridgeType = "signal"
 	BridgeSignald        BridgeType = "signald"
 	BridgeInstagram      BridgeType = "instagram"
-	BridgeLegacyDiscord  BridgeType = "discord"
-	BridgeLegacySlack    BridgeType = "slack"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
 	BridgeLinkedIn       BridgeType = "linkedin"
+	BridgeImessageCloud  BridgeType = "cloud-mac-stack"
 	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
@@ -59,11 +60,10 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeSignal:        defaultNotifications,
 	BridgeSignald:       defaultNotifications,
 	BridgeInstagram:     defaultNotifications,
-	BridgeLegacyDiscord: defaultNotifications,
-	BridgeLegacySlack:   defaultNotifications,
 	BridgeDiscord:       defaultNotifications,
 	BridgeSlack:         defaultNotifications,
 	BridgeLinkedIn:      defaultNotifications,
+	BridgeImessageCloud: defaultNotifications,
 	BridgeHungryserv:    defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
@@ -74,16 +74,15 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeDummyWebsocket: {},
 }
 
-const DefaultImageTemplate = "%s:%s-amd64"
+const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
 
 var imageTemplateOverrides = map[BridgeType]string{
-	BridgeDummy:         "%s:%s",
-	BridgeGroupMe:       "%s:%s",
-	BridgeHungryserv:    "%s:%s",
-	BridgeLegacyDiscord: "%s/discord:%s",
-	BridgeLegacySlack:   "%s/slack:%s",
-	BridgeLinkedIn:      "%s:%s",
-	BridgeSignald:       "%s:%s",
+	BridgeDummy:         "{{.Image}}:{{.Commit}}",
+	BridgeGroupMe:       "{{.Image}}:{{.Commit}}",
+	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
+	BridgeLinkedIn:      "{{.Image}}:{{.Commit}}",
+	BridgeSignald:       "{{.Image}}:{{.Commit}}",
+	BridgeImessageCloud: "{{.Commit}}",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
@@ -102,11 +101,22 @@ func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
 }
 
 func (bridgeType BridgeType) FormatImage(image, commit string) string {
-	template, ok := imageTemplateOverrides[bridgeType]
+	templateString, ok := imageTemplateOverrides[bridgeType]
 	if !ok {
-		template = DefaultImageTemplate
+		templateString = DefaultImageTemplate
 	}
-	return fmt.Sprintf(template, image, commit)
+
+	var result bytes.Buffer
+	tmpl := template.Must(template.New("t").Parse(templateString))
+	err := tmpl.Execute(&result, map[string]string{
+		"Image":  image,
+		"Commit": commit,
+	})
+
+	if err != nil {
+		log.Fatalf("Failed to format image for %q", bridgeType)
+	}
+	return result.String()
 }
 
 func (bridgeType BridgeType) TargetRepo(registry string) string {
