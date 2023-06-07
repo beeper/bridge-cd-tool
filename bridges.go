@@ -51,20 +51,19 @@ var defaultNotifications = []BridgeUpdateNotification{
 }
 
 var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
-	BridgeTelegram:      defaultNotifications,
-	BridgeWhatsApp:      defaultNotifications,
-	BridgeFacebook:      defaultNotifications,
-	BridgeGoogleChat:    defaultNotifications,
-	BridgeGroupMe:       defaultNotifications,
-	BridgeTwitter:       defaultNotifications,
-	BridgeSignal:        defaultNotifications,
-	BridgeSignald:       defaultNotifications,
-	BridgeInstagram:     defaultNotifications,
-	BridgeDiscord:       defaultNotifications,
-	BridgeSlack:         defaultNotifications,
-	BridgeLinkedIn:      defaultNotifications,
-	BridgeImessageCloud: defaultNotifications,
-	BridgeHungryserv:    defaultNotifications,
+	BridgeTelegram:   defaultNotifications,
+	BridgeWhatsApp:   defaultNotifications,
+	BridgeFacebook:   defaultNotifications,
+	BridgeGoogleChat: defaultNotifications,
+	BridgeGroupMe:    defaultNotifications,
+	BridgeTwitter:    defaultNotifications,
+	BridgeSignal:     defaultNotifications,
+	BridgeSignald:    defaultNotifications,
+	BridgeInstagram:  defaultNotifications,
+	BridgeDiscord:    defaultNotifications,
+	BridgeSlack:      defaultNotifications,
+	BridgeLinkedIn:   defaultNotifications,
+	BridgeHungryserv: defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
@@ -72,6 +71,11 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
 	},
 	BridgeDummyWebsocket: {},
+	BridgeImessageCloud: {
+		{Environment: EnvDevelopment, Channel: ChannelStable, DeployNext: true},
+		{Environment: EnvStaging, Channel: ChannelStable, DeployNext: true},
+		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
+	},
 }
 
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
