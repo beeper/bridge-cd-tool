@@ -38,7 +38,7 @@ const (
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
 	BridgeLinkedIn       BridgeType = "linkedin"
-	BridgeImessageCloud  BridgeType = "cloud-mac-stack"
+	BridgeImessageCloud  BridgeType = "imessagecloud"
 	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
