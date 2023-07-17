@@ -38,7 +38,7 @@ const (
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
 	BridgeLinkedIn       BridgeType = "linkedin"
-	BridgeImessageCloud  BridgeType = "imessagecloud"
+	BridgeiMessageCloud  BridgeType = "imessagecloud"
 	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
@@ -71,7 +71,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
 	},
 	BridgeDummyWebsocket: {},
-	BridgeImessageCloud: {
+	BridgeiMessageCloud: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, DeployNext: true},
 		{Environment: EnvStaging, Channel: ChannelStable, DeployNext: true},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
@@ -86,7 +86,7 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
 	BridgeLinkedIn:      "{{.Image}}:{{.Commit}}",
 	BridgeSignald:       "{{.Image}}:{{.Commit}}",
-	BridgeImessageCloud: "{{.Commit}}",
+	BridgeiMessageCloud: "{{.Commit}}",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
