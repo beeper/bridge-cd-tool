@@ -34,9 +34,11 @@ const (
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
 	BridgeSignald        BridgeType = "signald"
+	BridgeTmpSignalgo    BridgeType = "signalgo"
 	BridgeInstagram      BridgeType = "instagram"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
+	BridgeGoogleMessages BridgeType = "gmessages"
 	BridgeLinkedIn       BridgeType = "linkedin"
 	BridgeiMessageCloud  BridgeType = "imessagecloud"
 	BridgeHungryserv     BridgeType = "hungryserv"
@@ -51,19 +53,21 @@ var defaultNotifications = []BridgeUpdateNotification{
 }
 
 var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
-	BridgeTelegram:   defaultNotifications,
-	BridgeWhatsApp:   defaultNotifications,
-	BridgeFacebook:   defaultNotifications,
-	BridgeGoogleChat: defaultNotifications,
-	BridgeGroupMe:    defaultNotifications,
-	BridgeTwitter:    defaultNotifications,
-	BridgeSignal:     defaultNotifications,
-	BridgeSignald:    defaultNotifications,
-	BridgeInstagram:  defaultNotifications,
-	BridgeDiscord:    defaultNotifications,
-	BridgeSlack:      defaultNotifications,
-	BridgeLinkedIn:   defaultNotifications,
-	BridgeHungryserv: defaultNotifications,
+	BridgeTelegram:       defaultNotifications,
+	BridgeWhatsApp:       defaultNotifications,
+	BridgeFacebook:       defaultNotifications,
+	BridgeGoogleChat:     defaultNotifications,
+	BridgeGroupMe:        defaultNotifications,
+	BridgeTwitter:        defaultNotifications,
+	BridgeSignal:         defaultNotifications,
+	BridgeSignald:        defaultNotifications,
+	BridgeTmpSignalgo:    defaultNotifications,
+	BridgeInstagram:      defaultNotifications,
+	BridgeDiscord:        defaultNotifications,
+	BridgeSlack:          defaultNotifications,
+	BridgeGoogleMessages: defaultNotifications,
+	BridgeLinkedIn:       defaultNotifications,
+	BridgeHungryserv:     defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
