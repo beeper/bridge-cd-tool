@@ -59,10 +59,15 @@ func gitlabMain() {
 func doNotify(bridgeType BridgeType, image string) {
 	targets := bridgeType.NotificationTargets()
 	log.Printf("Notifying %d channels about %s %s", len(targets), bridgeType, image)
+	failed := false
 	for _, notif := range targets {
 		err := notif.Fill(bridgeType, image).Send()
 		if err != nil {
-			log.Fatalf("Failed to notify Beeper %s/%s about update to %s: %v", notif.Environment, notif.Channel, notif.Bridge, err)
+			log.Printf("Failed to notify Beeper %s/%s about update to %s: %v", notif.Environment, notif.Channel, notif.Bridge, err)
+			failed = true
 		}
+	}
+	if failed {
+		os.Exit(1)
 	}
 }
