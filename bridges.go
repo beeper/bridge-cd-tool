@@ -93,6 +93,7 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeLinkedIn:      "{{.Image}}:{{.Commit}}",
 	BridgeSignald:       "{{.Image}}:{{.Commit}}",
 	BridgeiMessageCloud: "{{.Commit}}",
+	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
@@ -100,6 +101,7 @@ const DefaultTargetRepoTemplate = "%s/bridge/%s"
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv: "/hungryserv",
 	BridgeSignald:    "/signald",
+	BridgeiMessagego: "/imessagego",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
