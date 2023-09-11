@@ -99,8 +99,9 @@ var imageTemplateOverrides = map[BridgeType]string{
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
-	BridgeHungryserv: "/hungryserv",
-	BridgeSignald:    "/signald",
+	BridgeHungryserv:  "/hungryserv",
+	BridgeSignald:     "/signald",
+	BridgeTmpSignalgo: "/bridge/signal",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
