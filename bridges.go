@@ -62,7 +62,6 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeTwitter:        defaultNotifications,
 	BridgeSignal:         defaultNotifications,
 	BridgeSignald:        defaultNotifications,
-	BridgeTmpSignalgo:    defaultNotifications,
 	BridgeInstagram:      defaultNotifications,
 	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
@@ -70,6 +69,10 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGoogleMessages: defaultNotifications,
 	BridgeLinkedIn:       defaultNotifications,
 	BridgeHungryserv:     defaultNotifications,
+	BridgeTmpSignalgo: {
+		{Environment: EnvDevelopment, Channel: ChannelStable},
+		{Environment: EnvStaging, Channel: ChannelStable},
+	},
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
