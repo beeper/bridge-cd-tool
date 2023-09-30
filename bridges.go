@@ -33,8 +33,6 @@ const (
 	BridgeGroupMe        BridgeType = "groupme"
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
-	BridgeSignald        BridgeType = "signald"
-	BridgeTmpSignalgo    BridgeType = "signalgo"
 	BridgeInstagram      BridgeType = "instagram"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
@@ -61,7 +59,6 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGroupMe:        defaultNotifications,
 	BridgeTwitter:        defaultNotifications,
 	BridgeSignal:         defaultNotifications,
-	BridgeSignald:        defaultNotifications,
 	BridgeInstagram:      defaultNotifications,
 	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
@@ -69,10 +66,6 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGoogleMessages: defaultNotifications,
 	BridgeLinkedIn:       defaultNotifications,
 	BridgeHungryserv:     defaultNotifications,
-	BridgeTmpSignalgo: {
-		{Environment: EnvDevelopment, Channel: ChannelStable},
-		{Environment: EnvStaging, Channel: ChannelStable},
-	},
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
@@ -94,7 +87,6 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeGroupMe:       "{{.Image}}:{{.Commit}}",
 	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
 	BridgeLinkedIn:      "{{.Image}}:{{.Commit}}",
-	BridgeSignald:       "{{.Image}}:{{.Commit}}",
 	BridgeiMessageCloud: "{{.Commit}}",
 	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
 }
@@ -102,9 +94,7 @@ var imageTemplateOverrides = map[BridgeType]string{
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
-	BridgeHungryserv:  "/hungryserv",
-	BridgeSignald:     "/signald",
-	BridgeTmpSignalgo: "/bridge/signal",
+	BridgeHungryserv: "/hungryserv",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
