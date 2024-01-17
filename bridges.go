@@ -34,6 +34,7 @@ const (
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
 	BridgeInstagram      BridgeType = "instagram"
+	BridgeInstagramGo    BridgeType = "instagramgo"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
 	BridgeGoogleMessages BridgeType = "gmessages"
@@ -60,6 +61,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeTwitter:        defaultNotifications,
 	BridgeSignal:         defaultNotifications,
 	BridgeInstagram:      defaultNotifications,
+	BridgeInstagramGo:    defaultNotifications,
 	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
 	BridgeSlack:          defaultNotifications,
@@ -94,7 +96,8 @@ var imageTemplateOverrides = map[BridgeType]string{
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
-	BridgeHungryserv: "/hungryserv",
+	BridgeHungryserv:  "/hungryserv",
+	BridgeInstagramGo: "/bridge/meta",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
