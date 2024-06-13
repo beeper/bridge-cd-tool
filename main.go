@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -47,13 +46,7 @@ func gitlabMain() {
 	branch := env("CI_COMMIT_BRANCH")
 	isLatest := branch == "main" || branch == "master"
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
-	sourceImage := env("CI_REGISTRY_IMAGE")
-	fmt.Println(sourceImage)
-	// TODO why is updating the env var in the gitlab CI script not working
-	if bridgeType == BridgeSignalV2 {
-		sourceImage += "/v2"
-	}
-	image := bridgeType.RetagImage(sourceImage, env("CI_COMMIT_SHA"), isLatest)
+	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"), isLatest)
 	if !isLatest {
 		log.Println("Not notifying Beeper about update: not on main branch")
 	} else if commitMsg := env("CI_COMMIT_MESSAGE"); strings.Contains(commitMsg, "[cd skip]") || strings.Contains(commitMsg, "[skip cd]") {
