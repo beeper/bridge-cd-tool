@@ -34,6 +34,7 @@ const (
 	BridgeGroupMe        BridgeType = "groupme"
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
+	BridgeSignalV2       BridgeType = "signalv2"
 	BridgeInstagram      BridgeType = "instagram"
 	BridgeInstagramGo    BridgeType = "instagramgo"
 	BridgeMeta           BridgeType = "meta"
@@ -62,6 +63,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGroupMe:        defaultNotifications,
 	BridgeTwitter:        defaultNotifications,
 	BridgeSignal:         defaultNotifications,
+	BridgeSignalV2:       defaultNotifications,
 	BridgeInstagram:      defaultNotifications,
 	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
