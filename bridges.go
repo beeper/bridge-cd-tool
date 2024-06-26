@@ -62,12 +62,11 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGoogleChat: defaultNotifications,
 	BridgeGroupMe:    defaultNotifications,
 	BridgeTwitter:    defaultNotifications,
-	BridgeSignal: {
-		{Environment: EnvStaging, Channel: ChannelStable},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
-	},
+	BridgeSignal:     {},
 	BridgeSignalV2: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeSignal},
+		// {Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeSignal},
+		// {Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeSignal},
 	},
 	BridgeInstagram:      defaultNotifications,
 	BridgeiMessagego:     defaultNotifications,
