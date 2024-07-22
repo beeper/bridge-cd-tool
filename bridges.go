@@ -41,6 +41,7 @@ const (
 	BridgeMeta           BridgeType = "meta"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
+	BridgeSlackV2        BridgeType = "slackgov2"
 	BridgeGoogleMessages BridgeType = "gmessages"
 	BridgeLinkedIn       BridgeType = "linkedin"
 	BridgeiMessageCloud  BridgeType = "imessagecloud"
@@ -74,6 +75,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
 	BridgeSlack:          defaultNotifications,
+	BridgeSlackV2:        {},
 	BridgeGoogleMessages: defaultNotifications,
 	BridgeLinkedIn:       defaultNotifications,
 	BridgeHungryserv:     defaultNotifications,
@@ -110,6 +112,7 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeiMessageCloud: "{{.Commit}}",
 	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
 	BridgeSignalV2:      "{{.Image}}:v2-{{.Commit}}-amd64",
+	BridgeSlackV2:       "{{.Image}}:v2-{{.Commit}}-amd64",
 	BridgeTelegramV2:    "{{.Image}}:v2-{{.Commit}}-amd64",
 }
 
@@ -118,6 +121,7 @@ const DefaultTargetRepoTemplate = "%s/bridge/%s"
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv: "/hungryserv",
 	BridgeSignalV2:   "/bridge/signal",
+	BridgeSlackV2:    "/bridge/slackgo",
 	BridgeTelegramV2: "/bridge/telegramgo",
 }
 
