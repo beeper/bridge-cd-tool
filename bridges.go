@@ -78,7 +78,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeSlackV2: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeSlack},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeSlack},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: false, Bridge: BridgeSlack},
+		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeSlack},
 	},
 	BridgeGoogleMessages: defaultNotifications,
 	BridgeLinkedIn:       defaultNotifications,
