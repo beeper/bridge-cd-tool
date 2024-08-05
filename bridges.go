@@ -82,10 +82,14 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeSlack},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeSlack},
 	},
-	BridgeGoogleMessages:   defaultNotifications,
-	BridgeGoogleMessagesV2: {},
-	BridgeLinkedIn:         defaultNotifications,
-	BridgeHungryserv:       defaultNotifications,
+	BridgeGoogleMessages: {},
+	BridgeGoogleMessagesV2: {
+		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeGoogleMessages},
+		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeGoogleMessages},
+		//		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: false, Bridge: BridgeGoogleMessages},
+	},
+	BridgeLinkedIn:   defaultNotifications,
+	BridgeHungryserv: defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
