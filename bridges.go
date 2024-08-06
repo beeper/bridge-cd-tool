@@ -35,13 +35,11 @@ const (
 	BridgeGroupMe        BridgeType = "groupme"
 	BridgeTwitter        BridgeType = "twitter"
 	BridgeSignal         BridgeType = "signal"
-	BridgeSignalV2       BridgeType = "signalv2"
 	BridgeInstagram      BridgeType = "instagram"
 	BridgeInstagramGo    BridgeType = "instagramgo"
 	BridgeMeta           BridgeType = "meta"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
-	BridgeSlackV2        BridgeType = "slackgov2"
 	BridgeGoogleMessages BridgeType = "gmessages"
 	BridgeLinkedIn       BridgeType = "linkedin"
 	BridgeiMessageCloud  BridgeType = "imessagecloud"
@@ -60,28 +58,18 @@ var defaultNotifications = []BridgeUpdateNotification{
 }
 
 var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
-	BridgeTelegram:   defaultNotifications,
-	BridgeTelegramV2: defaultNotifications,
-	BridgeWhatsApp:   defaultNotifications,
-	BridgeFacebook:   defaultNotifications,
-	BridgeGoogleChat: defaultNotifications,
-	BridgeGroupMe:    defaultNotifications,
-	BridgeTwitter:    defaultNotifications,
-	BridgeSignal:     {},
-	BridgeSignalV2: {
-		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeSignal},
-		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeSignal},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeSignal},
-	},
-	BridgeInstagram:  defaultNotifications,
-	BridgeiMessagego: defaultNotifications,
-	BridgeDiscord:    defaultNotifications,
-	BridgeSlack:      {},
-	BridgeSlackV2: {
-		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeSlack},
-		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeSlack},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeSlack},
-	},
+	BridgeTelegram:       defaultNotifications,
+	BridgeTelegramV2:     defaultNotifications,
+	BridgeWhatsApp:       defaultNotifications,
+	BridgeFacebook:       defaultNotifications,
+	BridgeGoogleChat:     defaultNotifications,
+	BridgeGroupMe:        defaultNotifications,
+	BridgeTwitter:        defaultNotifications,
+	BridgeSignal:         defaultNotifications,
+	BridgeInstagram:      defaultNotifications,
+	BridgeiMessagego:     defaultNotifications,
+	BridgeDiscord:        defaultNotifications,
+	BridgeSlack:          defaultNotifications,
 	BridgeGoogleMessages: {},
 	BridgeGoogleMessagesV2: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeGoogleMessages},
@@ -122,8 +110,6 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeLinkedIn:         "{{.Image}}:{{.Commit}}",
 	BridgeiMessageCloud:    "{{.Commit}}",
 	BridgeiMessagego:       "{{.Image}}:{{.Commit}}",
-	BridgeSignalV2:         "{{.Image}}:v2-{{.Commit}}-amd64",
-	BridgeSlackV2:          "{{.Image}}:v2-{{.Commit}}-amd64",
 	BridgeGoogleMessagesV2: "{{.Image}}:v2-{{.Commit}}-amd64",
 	BridgeTelegramV2:       "{{.Image}}:v2-{{.Commit}}-amd64",
 }
@@ -132,8 +118,6 @@ const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv:       "/hungryserv",
-	BridgeSignalV2:         "/bridge/signal",
-	BridgeSlackV2:          "/bridge/slackgo",
 	BridgeGoogleMessagesV2: "/bridge/gmessages",
 	BridgeTelegramV2:       "/bridge/telegramgo",
 }
