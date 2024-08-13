@@ -91,16 +91,16 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, DeployNext: true},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 	},
-	BridgeMeta: {
+	BridgeMeta: {},
+	BridgeMetaV2: {
 		// These are the default notifications, but duplicated for each mode
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeFacebookGo},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeFacebookGo},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeFacebookGo},
+		//{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: false, Bridge: BridgeFacebookGo},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeInstagramGo},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeInstagramGo},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeInstagramGo},
+		//{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: false, Bridge: BridgeInstagramGo},
 	},
-	BridgeMetaV2: {},
 }
 
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
