@@ -48,8 +48,6 @@ const (
 	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
-
-	BridgeGoogleMessagesV2 BridgeType = "gmessagesv2"
 )
 
 var defaultNotifications = []BridgeUpdateNotification{
@@ -71,14 +69,9 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
 	BridgeSlack:          defaultNotifications,
-	BridgeGoogleMessages: {},
-	BridgeGoogleMessagesV2: {
-		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeGoogleMessages},
-		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeGoogleMessages},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeGoogleMessages},
-	},
-	BridgeLinkedIn:   defaultNotifications,
-	BridgeHungryserv: defaultNotifications,
+	BridgeGoogleMessages: defaultNotifications,
+	BridgeLinkedIn:       defaultNotifications,
+	BridgeHungryserv:     defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
@@ -106,24 +99,22 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
 
 var imageTemplateOverrides = map[BridgeType]string{
-	BridgeDummy:            "{{.Image}}:{{.Commit}}",
-	BridgeGroupMe:          "{{.Image}}:{{.Commit}}",
-	BridgeHungryserv:       "{{.Image}}:{{.Commit}}",
-	BridgeLinkedIn:         "{{.Image}}:{{.Commit}}",
-	BridgeiMessageCloud:    "{{.Commit}}",
-	BridgeiMessagego:       "{{.Image}}:{{.Commit}}",
-	BridgeGoogleMessagesV2: "{{.Image}}:v2-{{.Commit}}-amd64",
-	BridgeTelegramV2:       "{{.Image}}:v2-{{.Commit}}-amd64",
-	BridgeMetaV2:           "{{.Image}}:v2-{{.Commit}}-amd64",
+	BridgeDummy:         "{{.Image}}:{{.Commit}}",
+	BridgeGroupMe:       "{{.Image}}:{{.Commit}}",
+	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
+	BridgeLinkedIn:      "{{.Image}}:{{.Commit}}",
+	BridgeiMessageCloud: "{{.Commit}}",
+	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
+	BridgeTelegramV2:    "{{.Image}}:v2-{{.Commit}}-amd64",
+	BridgeMetaV2:        "{{.Image}}:v2-{{.Commit}}-amd64",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
-	BridgeHungryserv:       "/hungryserv",
-	BridgeGoogleMessagesV2: "/bridge/gmessages",
-	BridgeTelegramV2:       "/bridge/telegramgo",
-	BridgeMetaV2:           "/bridge/meta",
+	BridgeHungryserv: "/hungryserv",
+	BridgeTelegramV2: "/bridge/telegramgo",
+	BridgeMetaV2:     "/bridge/meta",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
