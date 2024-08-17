@@ -38,7 +38,6 @@ const (
 	BridgeInstagram      BridgeType = "instagram"
 	BridgeInstagramGo    BridgeType = "instagramgo"
 	BridgeMeta           BridgeType = "meta"
-	BridgeMetaV2         BridgeType = "metav2"
 	BridgeDiscord        BridgeType = "discordgo"
 	BridgeSlack          BridgeType = "slackgo"
 	BridgeGoogleMessages BridgeType = "gmessages"
@@ -84,8 +83,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, DeployNext: true},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 	},
-	BridgeMeta: {},
-	BridgeMetaV2: {
+	BridgeMeta: {
 		// These are the default notifications, but duplicated for each mode
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeFacebookGo},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeFacebookGo},
@@ -106,7 +104,6 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeiMessageCloud: "{{.Commit}}",
 	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
 	BridgeTelegramV2:    "{{.Image}}:v2-{{.Commit}}-amd64",
-	BridgeMetaV2:        "{{.Image}}:v2-{{.Commit}}-amd64",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
@@ -114,7 +111,6 @@ const DefaultTargetRepoTemplate = "%s/bridge/%s"
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv: "/hungryserv",
 	BridgeTelegramV2: "/bridge/telegramgo",
-	BridgeMetaV2:     "/bridge/meta",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
