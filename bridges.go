@@ -116,7 +116,7 @@ const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv: "/hungryserv",
-	BridgeTelegramV2: "/bridge/telegramgo",
+	BridgeTelegramV2: "/bridge/telegram",
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
