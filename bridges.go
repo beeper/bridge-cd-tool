@@ -61,7 +61,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeTelegramV2: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeTelegram},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeTelegram},
-		{Environment: EnvProduction, Channel: ChannelInternal, Bridge: BridgeTelegram, DeployNext: false},
+		{Environment: EnvProduction, Channel: ChannelInternal, Bridge: BridgeTelegram, DeployNext: true},
 	},
 	BridgeWhatsApp:       defaultNotifications,
 	BridgeFacebook:       defaultNotifications,
