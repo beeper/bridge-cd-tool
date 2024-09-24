@@ -4,6 +4,7 @@ on: [push, pull_request]
 
 env:
   GO_VERSION: 1.23
+  GOTOOLCHAIN: local
   CGO_ENABLED: 0
 
 jobs:
