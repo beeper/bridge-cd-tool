@@ -67,7 +67,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeWhatsApp: {},
 	BridgeWhatsAppV2: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeWhatsApp},
-		//		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeWhatsApp},
+		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeWhatsApp},
 		{Environment: EnvProduction, Channel: ChannelInternal, Bridge: BridgeWhatsApp, DeployNext: true},
 	},
 	BridgeFacebook:       defaultNotifications,
