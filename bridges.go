@@ -76,9 +76,9 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGoogleMessages: defaultNotifications,
 	BridgeGoogleVoice:    defaultNotifications,
 	BridgeLinkedIn: {
-		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeLinkedIn},
-		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeLinkedIn},
-		{Environment: EnvProduction, Channel: ChannelInternal, Bridge: BridgeLinkedIn},
+		{Environment: EnvDevelopment, Channel: ChannelStable},
+		{Environment: EnvStaging, Channel: ChannelStable},
+		{Environment: EnvProduction, Channel: ChannelInternal},
 	},
 	BridgeHungryserv: defaultNotifications,
 	BridgeDummy: {
