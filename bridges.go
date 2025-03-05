@@ -110,7 +110,6 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeDummy:         "{{.Image}}:{{.Commit}}",
 	BridgeGroupMe:       "{{.Image}}:{{.Commit}}",
 	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
-	BridgeLinkedIn:      "{{.Image}}:{{.Commit}}",
 	BridgeiMessageCloud: "{{.Commit}}",
 	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
 	BridgeTelegramV2:    "{{.Image}}:v2-{{.Commit}}-amd64",
