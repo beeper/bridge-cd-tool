@@ -48,6 +48,9 @@ const (
 	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
+
+	// Meowlnir is not a bridge, but it uses the same CI
+	Meowlnir BridgeType = "meowlnir"
 )
 
 var defaultNotifications = []BridgeUpdateNotification{
@@ -102,6 +105,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeInstagramGo},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true, Bridge: BridgeInstagramGo},
 	},
+	Meowlnir: {},
 }
 
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
@@ -119,6 +123,7 @@ const DefaultTargetRepoTemplate = "%s/bridge/%s"
 
 var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeHungryserv: "/hungryserv",
+	Meowlnir:         "/meowlnir",
 	BridgeTelegramV2: "/bridge/telegram",
 }
 
