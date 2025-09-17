@@ -1,5 +1,5 @@
 module gitlab.com/beeper/bridge-cd-tool
 
-go 1.22.0
+go 1.24.0
 
-toolchain go1.23.1
+toolchain go1.25.1

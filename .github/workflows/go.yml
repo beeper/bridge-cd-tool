@@ -3,7 +3,7 @@ name: Go
 on: [push, pull_request]
 
 env:
-  GO_VERSION: 1.23
+  GO_VERSION: "1.25"
   GOTOOLCHAIN: local
   CGO_ENABLED: 0
 
