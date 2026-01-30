@@ -48,6 +48,7 @@ const (
 	BridgeHungryserv     BridgeType = "hungryserv"
 	BridgeDummy          BridgeType = "dummybridge"
 	BridgeDummyWebsocket BridgeType = "dummybridgews"
+	BridgeAI             BridgeType = "ai"
 
 	// Meowlnir is not a bridge, but it uses the same CI
 	Meowlnir BridgeType = "meowlnir"
@@ -80,6 +81,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGoogleVoice:    defaultNotifications,
 	BridgeLinkedIn:       defaultNotifications,
 	BridgeHungryserv:     defaultNotifications,
+	BridgeAI:             defaultNotifications,
 	BridgeDummy: {
 		{Environment: EnvDevelopment, Channel: ChannelStable},
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeDummyWebsocket},
@@ -107,6 +109,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
 
 var imageTemplateOverrides = map[BridgeType]string{
+	BridgeAI:            "{{.Image}}:{{.Commit}}",
 	BridgeDummy:         "{{.Image}}:{{.Commit}}",
 	BridgeGroupMe:       "{{.Image}}:{{.Commit}}",
 	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
