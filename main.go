@@ -29,7 +29,7 @@ func main() {
 }
 
 func githubMain() {
-	if branch := env("GITHUB_REF_NAME"); branch != "main" && branch != "master" {
+	if branch := env("GITHUB_REF_NAME"); branch != "main" && branch != "master" && branch != "xchat" {
 		log.Println("Not notifying Beeper about update: not on main branch")
 		return
 	}
