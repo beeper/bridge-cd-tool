@@ -44,7 +44,7 @@ func gitlabMain() {
 		return
 	}
 	branch := env("CI_COMMIT_BRANCH")
-	isLatest := branch == "main" || branch == "master"
+	isLatest := branch == "main" || branch == "master" || branch == "xchat"
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
 	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"), isLatest)
 	if !isLatest {
