@@ -29,7 +29,7 @@ func main() {
 }
 
 func githubMain() {
-	if branch := env("GITHUB_REF_NAME"); branch != "main" && branch != "master" && branch != "xchat" {
+	if branch := env("GITHUB_REF_NAME"); branch != "main" && branch != "master" && branch != "xchat" && branch != "megabridge" {
 		log.Println("Not notifying Beeper about update: not on main branch")
 		return
 	}
@@ -44,7 +44,7 @@ func gitlabMain() {
 		return
 	}
 	branch := env("CI_COMMIT_BRANCH")
-	isLatest := branch == "main" || branch == "master" || branch == "xchat"
+	isLatest := branch == "main" || branch == "master" || branch == "xchat" || branch == "megabridge"
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
 	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"), isLatest)
 	if !isLatest {
