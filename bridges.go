@@ -42,6 +42,7 @@ const (
 	BridgeGoogleMessages BridgeType = "gmessages"
 	BridgeGoogleVoice    BridgeType = "gvoice"
 	BridgeLinkedIn       BridgeType = "linkedin"
+	BridgeLine           BridgeType = "line"
 	BridgeiMessageCloud  BridgeType = "imessagecloud"
 	BridgeiMessagego     BridgeType = "imessagego"
 	BridgeHungryserv     BridgeType = "hungryserv"
@@ -74,6 +75,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeGoogleMessages: defaultNotifications,
 	BridgeGoogleVoice:    defaultNotifications,
 	BridgeLinkedIn:       defaultNotifications,
+	BridgeLine:           defaultNotifications,
 	BridgeHungryserv:     defaultNotifications,
 	BridgeAI:             defaultNotifications,
 	BridgeDummy: {
