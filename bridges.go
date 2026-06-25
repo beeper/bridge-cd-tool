@@ -66,13 +66,10 @@ var defaultNotifications = []BridgeUpdateNotification{
 var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	BridgeTelegram:       defaultNotifications,
 	BridgeWhatsApp:       defaultNotifications,
-	BridgeFacebook:       defaultNotifications,
 	BridgeGoogleChat:     defaultNotifications,
 	BridgeGroupMe:        defaultNotifications,
 	BridgeTwitter:        defaultNotifications,
 	BridgeSignal:         defaultNotifications,
-	BridgeInstagram:      defaultNotifications,
-	BridgeiMessagego:     defaultNotifications,
 	BridgeDiscord:        defaultNotifications,
 	BridgeSlack:          defaultNotifications,
 	BridgeGoogleMessages: defaultNotifications,
@@ -96,6 +93,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, DeployNext: true},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 	},
+	BridgeInstagramGo: {},
 	BridgeMeta: {
 		// These are the default notifications, but duplicated for each mode
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeFacebookGo},
