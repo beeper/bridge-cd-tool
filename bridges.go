@@ -115,7 +115,7 @@ var imageTemplateOverrides = map[BridgeType]string{
 	BridgeHungryserv:    "{{.Image}}:{{.Commit}}",
 	BridgeiMessageCloud: "{{.Commit}}",
 	BridgeiMessagego:    "{{.Image}}:{{.Commit}}",
-	BridgeInstagramGo:   "{{.Image}}:ig-{{.Commit}}",
+	BridgeInstagramGo:   "{{.Image}}:ig-{{.Commit}}-amd64",
 }
 
 const DefaultTargetRepoTemplate = "%s/bridge/%s"
