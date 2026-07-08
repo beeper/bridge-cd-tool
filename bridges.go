@@ -93,11 +93,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 		{Environment: EnvStaging, Channel: ChannelStable, DeployNext: true},
 		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 	},
-	BridgeInstagramGo: {
-		{Environment: EnvDevelopment, Channel: ChannelStable},
-		{Environment: EnvStaging, Channel: ChannelStable},
-		{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: false, Bridge: BridgeInstagramGo},
-	},
+	BridgeInstagramGo: defaultNotifications,
 	BridgeMeta: {
 		{Environment: EnvDevelopment, Channel: ChannelStable, Bridge: BridgeFacebookGo},
 		{Environment: EnvStaging, Channel: ChannelStable, Bridge: BridgeFacebookGo},
