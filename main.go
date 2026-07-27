@@ -29,11 +29,11 @@ func main() {
 }
 
 func githubMain() {
-	if branch := env("GITHUB_REF_NAME"); branch != "main" && branch != "master" {
+	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
+	if !bridgeType.IsLatestBranch(env("GITHUB_REF_NAME")) {
 		log.Println("Not notifying Beeper about update: not on main branch")
 		return
 	}
-	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
 	image := bridgeType.FormatImage(bridgeType.TargetRepo(env("CI_REGISTRY")), env("GITHUB_SHA"))
 	doNotify(bridgeType, image)
 }
@@ -43,9 +43,8 @@ func gitlabMain() {
 		log.Println("Not notifying Beeper about update: build failed")
 		return
 	}
-	branch := env("CI_COMMIT_BRANCH")
-	isLatest := branch == "main" || branch == "master" || branch == "megadiscord" || branch == "experimental"
 	bridgeType := BridgeType(env("BEEPER_BRIDGE_TYPE"))
+	isLatest := bridgeType.IsLatestBranch(env("CI_COMMIT_BRANCH"))
 	image := bridgeType.RetagImage(env("CI_REGISTRY_IMAGE"), env("CI_COMMIT_SHA"), isLatest)
 	if !isLatest {
 		log.Println("Not notifying Beeper about update: not on main branch")

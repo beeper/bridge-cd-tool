@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"log"
+	"slices"
 	"text/template"
 )
 
@@ -102,6 +103,14 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	Meowlnir: {},
 }
 
+// Branches other than main/master which are treated as the latest image, per bridge.
+// These only apply to the listed bridge: a branch with the same name in any other
+// bridge repo won't be retagged as latest nor notified about.
+var bridgeLatestBranchOverrides = map[BridgeType][]string{
+	BridgeDiscord:        {"megadiscord"},
+	BridgeGoogleMessages: {"experimental"},
+}
+
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
 
 var imageTemplateOverrides = map[BridgeType]string{
@@ -120,6 +129,13 @@ var targetImageRepoOverrides = map[BridgeType]string{
 	BridgeInstagramGo: "/bridge/meta",
 	BridgeHungryserv:  "/hungryserv",
 	Meowlnir:          "/meowlnir",
+}
+
+func (bridgeType BridgeType) IsLatestBranch(branch string) bool {
+	if branch == "main" || branch == "master" {
+		return true
+	}
+	return slices.Contains(bridgeLatestBranchOverrides[bridgeType], branch)
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
