@@ -103,9 +103,9 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 	Meowlnir: {},
 }
 
-// Branches other than main/master which are treated as the latest image, per bridge.
-// These only apply to the listed bridge: a branch with the same name in any other
-// bridge repo won't be retagged as latest nor notified about.
+// The full set of branches treated as the latest image, per bridge. A bridge listed
+// here uses only these branches: main/master are not implicitly included, so pushes
+// to them are neither retagged as latest nor notified about.
 var bridgeLatestBranchOverrides = map[BridgeType][]string{
 	BridgeDiscord:        {"megadiscord"},
 	BridgeGoogleMessages: {"experimental"},
@@ -132,10 +132,10 @@ var targetImageRepoOverrides = map[BridgeType]string{
 }
 
 func (bridgeType BridgeType) IsLatestBranch(branch string) bool {
-	if branch == "main" || branch == "master" {
-		return true
+	if overrides, ok := bridgeLatestBranchOverrides[bridgeType]; ok {
+		return slices.Contains(overrides, branch)
 	}
-	return slices.Contains(bridgeLatestBranchOverrides[bridgeType], branch)
+	return branch == "main" || branch == "master"
 }
 
 func (bridgeType BridgeType) NotificationTargets() []BridgeUpdateNotification {
