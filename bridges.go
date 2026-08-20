@@ -59,7 +59,11 @@ const (
 )
 
 var defaultNotifications = []BridgeUpdateNotification{
+	{Environment: EnvDevelopment, Channel: ChannelInternal},
+	{Environment: EnvDevelopment, Channel: ChannelNightly},
 	{Environment: EnvDevelopment, Channel: ChannelStable},
+	{Environment: EnvStaging, Channel: ChannelInternal},
+	{Environment: EnvStaging, Channel: ChannelNightly},
 	{Environment: EnvStaging, Channel: ChannelStable},
 	{Environment: EnvProduction, Channel: ChannelInternal, DeployNext: true},
 }
