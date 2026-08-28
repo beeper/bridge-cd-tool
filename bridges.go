@@ -111,8 +111,7 @@ var bridgeNotifications = map[BridgeType][]BridgeUpdateNotification{
 // here uses only these branches: main/master are not implicitly included, so pushes
 // to them are neither retagged as latest nor notified about.
 var bridgeLatestBranchOverrides = map[BridgeType][]string{
-	BridgeDiscord:        {"megadiscord"},
-	BridgeGoogleMessages: {"experimental"},
+	BridgeDiscord: {"megadiscord"},
 }
 
 const DefaultImageTemplate = "{{.Image}}:{{.Commit}}-amd64"
